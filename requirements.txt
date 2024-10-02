@@ -1,2 +1,10 @@
 google-cloud-firestore
 aiortc
+numba
+ipython
+scipy
+opencv-python
+h5py
+gymnasium
+mujoco
+dm_control
