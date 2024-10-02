@@ -1,0 +1,39 @@
+<launch>
+
+  <arg name="robot_model"                       default="vx300s_7dof"/>
+  <arg name="robot_name"                        default="$(arg robot_model)"/>
+  <arg name="base_link_frame"                   default="base_link"/>
+  <arg name="use_world_frame"                   default="true"/>
+  <arg name="external_urdf_loc"                 default=""/>
+  <arg name="use_rviz"                          default="true"/>
+  <arg name="motor_configs"                     default="$(find vx300s_7dof_description)/config/vx300s_7dof.yaml"/>
+  <arg name="mode_configs"                      default="$(find vx300s_7dof_description)/config/modes.yaml"/>
+  <arg name="load_configs"                      default="true"/>
+  <arg name="use_sim"                           default="false"/>
+
+  <arg name="xs_sdk_type" value="xs_sdk" unless="$(arg use_sim)"/>
+  <arg name="xs_sdk_type" value="xs_sdk_sim" if="$(arg use_sim)"/>
+
+  <include file="$(find vx300s_7dof_description)/launch/xsarm_description.launch">
+    <arg name="robot_model"                       value="$(arg robot_model)"/>
+    <arg name="robot_name"                        value="$(arg robot_name)"/>
+    <arg name="base_link_frame"                   value="$(arg base_link_frame)"/>
+    <arg name="use_world_frame"                   value="$(arg use_world_frame)"/>
+    <arg name="external_urdf_loc"                 value="$(arg external_urdf_loc)"/>
+    <arg name="use_joint_pub"                    value="false"/>
+    <arg name="use_joint_pub_gui"                value="false"/>
+    <arg name="use_rviz"                          value="$(arg use_rviz)"/>
+  </include>
+
+  <node
+    name="xs_sdk"
+    pkg="interbotix_xs_sdk"
+    type="$(arg xs_sdk_type)"
+    output="screen"
+    ns="$(arg robot_name)">
+    <param name="motor_configs"                   value="$(arg motor_configs)"/>
+    <param name="mode_configs"                    value="$(arg mode_configs)"/>
+    <param name="load_configs"                    value="$(arg load_configs)"/>
+  </node>
+
+</launch>

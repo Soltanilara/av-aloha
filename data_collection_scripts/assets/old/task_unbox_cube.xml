@@ -1,0 +1,21 @@
+<mujoco>
+    <include file="scene.xml"/>
+    <worldbody>
+
+        <body name="cube" pos="0 0.0 0.0">
+            <freejoint/>
+            <geom type="box" pos="0 0 0.015" size="0.015 0.015 0.015" rgba=".5 .7 .5 1" friction="1 5e-3 5e-4" priority="1"/>
+        </body>
+
+        <body name="open_box" pos="0 0.0 0.0">
+            <joint type="free" frictionloss="0.01"/>
+            <geom  mass="100" pos="0 0 0.002" size="0.1 0.1 0.002" type="box" rgba=".7 .5 .5 1" />
+            <geom  pos="0.1 0 .06" size="0.002 0.1 0.06" type="box" rgba=".7 .5 .5 1" />
+            <geom  pos="0 0.1 .06" euler="0 0 1.57" size="0.002 0.1 0.06" type="box" rgba=".7 .5 .5 1" />
+            <geom  pos="0 -0.1 .06" euler="0 0 -1.57" size="0.002 0.1 0.06" type="box" rgba=".7 .5 .5 1" />
+            <geom  pos="-0.1 0 .06" euler="0 0 3.14" size="0.002 0.1 0.06" type="box" rgba=".7 .5 .5 1" />
+        </body>
+
+    </worldbody>
+
+</mujoco>

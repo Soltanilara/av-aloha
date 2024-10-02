@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "gym_guided_vision"
+version = "0.1.0"
+description = "gym env for guided vision project"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mujoco = "^3.2.2"
+dm-control = "^1.0.22"
+
+[tool.poetry.group.dev.dependencies]
+numba = "^0.60.0"
+h5py = "^3.11.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

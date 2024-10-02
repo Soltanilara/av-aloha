@@ -1,0 +1,58 @@
+<mujoco>
+    <!-- <extension>
+        <plugin plugin="mujoco.elasticity.cable"/>
+    </extension> -->
+
+    <include file="scene.xml"/>
+    <worldbody>
+
+        <body name="board" pos="0 0 0.0" >
+            <joint name="board_joint" type="free" />
+            <geom  pos="0 0 0.01" euler="0 0 0" size="0.12 0.12 0.01" type="box" rgba="0.48 0.30 0.18 1" friction="0.5"/>
+            <geom  pos="0 0.125 0.03" euler="0 0 0" size="0.12 0.005 0.03" type="box" rgba=".27 .12 0 1"  friction="0.5"/>
+            <geom  pos="0.125 0 0.03" euler="0 0 1.57" size="0.13 0.005 0.03" type="box" rgba=".27 .12 0 1" friction="0.5"/>
+            <geom  pos="-0.125 0.0 0.03" euler="0 0 1.57" size="0.13 0.005 0.03" type="box" rgba=".27 .12 0 1" friction="0.5"/>
+            <geom  pos="0 -0.125 0.03" euler="0 0 0" size="0.12 0.005 0.03" type="box" rgba=".27 .12 0 1" friction="0.5"/>
+            <geom  pos="-0.03 0.05 0.03" euler="0 0 0" size="0.09 0.005 0.03" type="box" rgba=".27 .12 0 1" friction="0.5"/>
+            <geom  pos="0.03 -0.05 0.03" euler="0 0 0" size="0.09 0.005 0.03" type="box" rgba=".27 .12 0 1" friction="0.5"/>
+
+            <geom  pos="0.175 0 0.045" size="0.05 0.015 0.015" type="box" rgba=".27 .12 0 1" friction="1"/>
+            <geom  pos="-0.175 0 0.045" size="0.05 0.015 0.015" type="box" rgba=".27 .12 0 1" friction="1"/>
+
+
+            <!-- <body pos="-0.137 0 0.04" euler="0 0 3.14">
+                <composite prefix="handle_1" type="cable" curve="s 0 0" count="6 1 1"
+                                size="0.1 0.02 0.02 " initial="none">
+                    <plugin plugin="mujoco.elasticity.cable">
+                        <config key="twist" value="5e8"/>
+                        <config key="bend" value="15e5"/>
+                        <config key="vmax" value="0"/>
+                    </plugin>
+                    <joint kind="main" damping="0.15" armature="0.01"/>
+                    <geom type="capsule" size="0.02" rgba=".27 .12 0 1"/>
+                </composite>    
+            </body>
+
+            <body pos="0.137 0 0.04" euler="0 0 0">
+                <composite prefix="handle_2" type="cable" curve="s 0 0" count="6 1 1"
+                                size="0.1 0.02 0.02 " initial="none">
+                    <plugin plugin="mujoco.elasticity.cable">
+                        <config key="twist" value="5e8"/>
+                        <config key="bend" value="15e5"/>
+                        <config key="vmax" value="0"/>
+                    </plugin>
+                    <joint kind="main" damping="0.15" armature="0.01"/>
+                    <geom type="capsule" size="0.02" rgba=".27 .12 0 1" friction="1 5e-3 5e-4" priority="1" solref=".00001 1"/>
+                </composite>    
+            </body> -->
+
+            
+        </body>
+        <body name="marble" pos="0 0 0.1" >
+            <joint name="marble_joint" type="free"  />
+            <geom  pos="0 0 0" size="0.02" type="sphere" rgba=".7 .5 .5 1" friction="0.5"/>
+        </body>
+
+    </worldbody>
+
+</mujoco>

@@ -1,0 +1,100 @@
+<launch>
+
+  <arg name="robot_model_puppet_left"           default="vx300s"/>
+  <arg name="robot_model_puppet_right"          default="vx300s"/>
+  <arg name="robot_model_puppet_middle"         default="vx300s_7dof"/>
+
+  <arg name="base_link_puppet"                  default="base_link"/>
+
+  <arg name="puppet_modes_left"                 default="$(find guided_vision)/config/puppet_modes_left.yaml"/>
+  <arg name="puppet_modes_right"                default="$(find guided_vision)/config/puppet_modes_right.yaml"/>
+  <arg name="puppet_modes_middle"               default="$(find guided_vision)/config/puppet_modes_middle.yaml"/>
+
+  <arg name="launch_driver"                     default="true"/>
+  <arg name="use_sim"                           default="false"/>
+  <arg name="use_rviz"                          default="false"/>
+
+  <arg name="robot_name_puppet_left"            value="puppet_left"/>
+  <arg name="robot_name_puppet_right"           value="puppet_right"/>
+  <arg name="robot_name_puppet_middle"          value="puppet_middle"/>
+
+  <include if="$(arg launch_driver)" file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
+    <arg name="robot_model"                       value="$(arg robot_model_puppet_left)"/>
+    <arg name="robot_name"                        value="$(arg robot_name_puppet_left)"/>
+    <arg name="base_link_frame"                   value="$(arg base_link_puppet)"/>
+    <arg name="use_world_frame"                   value="false"/>
+    <arg name="use_rviz"                          value="false"/>
+    <arg name="mode_configs"                      value="$(arg puppet_modes_left)"/>
+    <arg name="use_sim"                           value="$(arg use_sim)"/>
+  </include>
+
+  <include if="$(arg launch_driver)" file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
+    <arg name="robot_model"                       value="$(arg robot_model_puppet_right)"/>
+    <arg name="robot_name"                        value="$(arg robot_name_puppet_right)"/>
+    <arg name="base_link_frame"                   value="$(arg base_link_puppet)"/>
+    <arg name="use_world_frame"                   value="false"/>
+    <arg name="use_rviz"                          value="false"/>
+    <arg name="mode_configs"                      value="$(arg puppet_modes_right)"/>
+    <arg name="use_sim"                           value="$(arg use_sim)"/>
+  </include>
+
+  <include if="$(arg launch_driver)" file="$(find vx300s_7dof_description)/launch/xsarm_control.launch">
+    <arg name="robot_model"                       value="$(arg robot_model_puppet_middle)"/>
+    <arg name="robot_name"                        value="$(arg robot_name_puppet_middle)"/>
+    <arg name="base_link_frame"                   value="$(arg base_link_puppet)"/>
+    <arg name="use_world_frame"                   value="false"/>
+    <arg name="use_rviz"                          value="$(arg use_rviz)"/>
+    <arg name="mode_configs"                      value="$(arg puppet_modes_middle)"/>
+    <arg name="use_sim"                           value="$(arg use_sim)"/>
+  </include>
+
+  <node
+    name="puppet_left_transform_broadcaster"
+    pkg="tf2_ros"
+    type="static_transform_publisher"
+    args="0.545 0.469 0 -1.57 0 0 /world /$(arg robot_name_puppet_left)/base_link"/>
+
+  <node
+    name="puppet_right_transform_broadcaster"
+    pkg="tf2_ros"
+    type="static_transform_publisher"
+    args="0.545 -0.469 0 1.57 0 0 /world /$(arg robot_name_puppet_right)/base_link"/>
+
+  <node
+    name="puppet_middle_transform_broadcaster"
+    pkg="tf2_ros"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 /world /$(arg robot_name_puppet_middle)/base_link"/>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+      <arg name="camera" value="cam_left_wrist"/>
+      <arg name="serial_no" value="230322272239"/>
+      <arg name="color_width" value="640"/>
+      <arg name="color_height" value="480"/>
+      <arg name="color_fps" value="60"/>
+  </include>
+  
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+      <arg name="camera" value="cam_right_wrist"/>
+      <arg name="serial_no" value="230322270105"/>
+      <arg name="color_width" value="640"/>
+      <arg name="color_height" value="480"/>
+      <arg name="color_fps" value="60"/>
+  </include>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+      <arg name="camera" value="cam_high"/>
+      <arg name="serial_no" value="230322270396"/>
+      <arg name="color_width" value="640"/>
+      <arg name="color_height" value="480"/>
+      <arg name="color_fps" value="60"/>
+  </include>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+      <arg name="camera" value="cam_low"/>
+      <arg name="serial_no" value="230322271312"/>
+      <arg name="color_width" value="640"/>
+      <arg name="color_height" value="480"/>
+      <arg name="color_fps" value="60"/>
+  </include>
+</launch>

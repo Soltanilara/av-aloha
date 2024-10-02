@@ -1,0 +1,5 @@
+port: /dev/ttyDXL_puppet_middle
+
+groups:
+  arm:
+    torque_enable: false

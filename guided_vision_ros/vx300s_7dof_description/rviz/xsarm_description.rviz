@@ -1,0 +1,287 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /TF1/Frames1
+      Splitter Ratio: 0.5777778029441833
+    Tree Height: 725
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+  - Class: interbotix_xs_rviz/Interbotix Control Panel
+    Name: Interbotix Control Panel
+    RobotNameSpace: vx300s
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.699999988079071
+      Cell Size: 0.25
+      Class: rviz/Grid
+      Color: 255; 255; 255
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        vx300s_7dof/base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/camera_attach_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        vx300s_7dof/lower_forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/shoulder_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/upper_forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/wrist_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/wrist_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vx300s_7dof/wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed_camera_center:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        zed_left_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed_left_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed_right_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed_right_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        vx300s_7dof/base_link:
+          Value: true
+        vx300s_7dof/camera_attach_link:
+          Value: true
+        vx300s_7dof/lower_forearm_link:
+          Value: true
+        vx300s_7dof/shoulder_link:
+          Value: true
+        vx300s_7dof/upper_arm_link:
+          Value: true
+        vx300s_7dof/upper_forearm_link:
+          Value: true
+        vx300s_7dof/wrist_1_link:
+          Value: true
+        vx300s_7dof/wrist_2_link:
+          Value: true
+        vx300s_7dof/wrist_3_link:
+          Value: true
+        world:
+          Value: true
+        zed_base_link:
+          Value: true
+        zed_camera_center:
+          Value: true
+        zed_left_camera_frame:
+          Value: true
+        zed_left_camera_optical_frame:
+          Value: true
+        zed_right_camera_frame:
+          Value: true
+        zed_right_camera_optical_frame:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 0.15000000596046448
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          vx300s_7dof/base_link:
+            vx300s_7dof/shoulder_link:
+              vx300s_7dof/upper_arm_link:
+                vx300s_7dof/upper_forearm_link:
+                  vx300s_7dof/lower_forearm_link:
+                    vx300s_7dof/wrist_1_link:
+                      vx300s_7dof/wrist_2_link:
+                        vx300s_7dof/wrist_3_link:
+                          vx300s_7dof/camera_attach_link:
+                            zed_base_link:
+                              zed_camera_center:
+                                zed_left_camera_frame:
+                                  zed_left_camera_optical_frame:
+                                    {}
+                                zed_right_camera_frame:
+                                  zed_right_camera_optical_frame:
+                                    {}
+      Update Interval: 0
+      Value: true
+    - Class: rviz/InteractiveMarkers
+      Enable Transparency: true
+      Enabled: true
+      Name: InteractiveMarkers
+      Show Axes: false
+      Show Descriptions: true
+      Show Visual Aids: false
+      Update Topic: /vx300s_7dof/pose_marker_server/update
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 0; 176; 240
+    Default Light: true
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 1.5737265348434448
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Field of View: 0.7853981852531433
+      Focal Point:
+        X: 0.38708919286727905
+        Y: -0.4024849236011505
+        Z: 0.3117392063140869
+      Focal Shape Fixed Size: false
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.03539791703224182
+      Target Frame: <Fixed Frame>
+      Yaw: 0.9153972864151001
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1016
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Interbotix Control Panel:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000001920000035efc020000000dfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b0000035e000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000180054006f00720071007500650045006e00610062006c006500000002fe000000990000000000000000fb0000001a0054006f007200710075006500200045006e00610062006c00650000000300000000b20000000000000000fb0000001a0054006f007200710075006500200045006e00610062006c00650000000316000000810000000000000000fb0000001a0054006f007200710075006500200045006e00610062006c006501000002fd0000009a0000000000000000fb000000300049006e0074006500720062006f00740069007800200043006f006e00740072006f006c002000500061006e0065006c000000025b0000013e000001220000013e000000010000010f00000396fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000002800000396000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000073a0000003efc0100000002fb0000000800540069006d006501000000000000073a0000030700fffffffb0000000800540069006d00650100000000000004500000000000000000000005a20000035e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 1850
+  X: 38
+  Y: -5

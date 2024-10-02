@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<robot name="vx300s" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="robot_name" default = "vx300s_7dof"/>
+  <xacro:arg name="base_link_frame" default="base_link"/>
+  <xacro:arg name="show_ar_tag" default="false"/>
+  <xacro:arg name="show_gripper_bar" default="true"/>
+  <xacro:arg name="show_gripper_fingers" default="true"/>
+  <xacro:arg name="use_world_frame" default="false"/>
+  <xacro:arg name="external_urdf_loc" default=""/>
+  <xacro:arg name="load_gazebo_configs" default="false"/>
+
+  <xacro:property name="urdf_loc" value="$(arg external_urdf_loc)"/>
+  <xacro:property name="pi_offset" value="0.00001"/>
+
+  <material name="interbotix_black">
+    <texture filename="package://vx300s_7dof_description/meshes/interbotix_black.png"/>
+  </material>
+
+  <xacro:if value="$(arg use_world_frame)">
+    <link name="world"/>
+    <joint name="fixed" type="fixed">
+      <parent link="world"/>
+      <child link="$(arg robot_name)/$(arg base_link_frame)"/>
+    </joint>
+  </xacro:if>
+
+  <link name="$(arg robot_name)/$(arg base_link_frame)">
+    <visual>
+      <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_1_base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_1_base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 ${pi/2}" xyz="-0.0534774000 -0.0005625750 0.0205961000"/>
+      <mass value="0.969034" />
+      <inertia ixx="0.0060240000" iyy="0.0017000000" izz="0.0071620000" ixy="0.0000471300" ixz="0.0000038510" iyz="-0.0000841500" />
+    </inertial>
+  </link>
+
+  <joint name="waist" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="${-pi + pi_offset}" upper="${pi - pi_offset}" velocity="${pi}"/>
+    <origin rpy="0 0 0" xyz="0 0 0.079"/>
+    <parent link="$(arg robot_name)/$(arg base_link_frame)"/>
+    <child link="$(arg robot_name)/shoulder_link"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <transmission name="trans_waist">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="waist">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="waist_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <link name="$(arg robot_name)/shoulder_link">
+    <visual>
+      <origin rpy="0 0 ${pi/2}" xyz="0 0 -0.003"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_2_shoulder.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 ${pi/2}" xyz="0 0 -0.003"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_2_shoulder.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 ${pi/2}" xyz="0.0002592330 -0.0000033552 0.0116129000"/>
+      <mass value="0.798614" />
+      <inertia ixx="0.0009388000" iyy="0.0011380000" izz="0.0012010000" ixy="-0.0000000010" ixz="-0.0000000191" iyz="0.0000059568" />
+    </inertial>
+  </link>
+
+  <joint name="shoulder" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="20" lower="${radians(-106)}" upper="${radians(72)}" velocity="${pi}"/>
+    <origin rpy="0 0 0" xyz="0 0 0.04805"/>
+    <parent link="$(arg robot_name)/shoulder_link"/>
+    <child link="$(arg robot_name)/upper_arm_link"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <transmission name="trans_shoulder">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <link name="$(arg robot_name)/upper_arm_link">
+    <visual>
+      <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_3_upper_arm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_3_upper_arm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 ${pi/2}" xyz="0.0206949000 0.0000000004 0.2264590000"/>
+      <mass value="0.792592" />
+      <inertia ixx="0.0089250000" iyy="0.0089370000" izz="0.0009357000" ixy="0.0000000000" ixz="0.0000000000" iyz="0.0012010000" />
+    </inertial>
+  </link>
+
+  <joint name="elbow" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="15" lower="${radians(-101)}" upper="${radians(92)}" velocity="${pi}"/>
+    <origin rpy="0 0 0" xyz="0.05955 0 0.3"/>
+    <parent link="$(arg robot_name)/upper_arm_link"/>
+    <child link="$(arg robot_name)/upper_forearm_link"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <transmission name="trans_elbow">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="elbow">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="elbow_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <link name="$(arg robot_name)/upper_forearm_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_4_upper_forearm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_4_upper_forearm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.105723 0 0"/>
+      <mass value="0.322228" />
+      <inertia ixx="0.0001524000" iyy="0.0013420000" izz="0.0014410000" ixy="-0.0000188300" ixz="-0.0000084064" iyz="0.0000012564" />
+    </inertial>
+  </link>
+
+  <joint name="forearm_roll" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="2" lower="${-pi + pi_offset}" upper="${pi - pi_offset}" velocity="${pi}"/>
+    <origin rpy="0 0 0" xyz="0.2 0 0"/>
+    <parent link="$(arg robot_name)/upper_forearm_link"/>
+    <child link="$(arg robot_name)/lower_forearm_link"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <transmission name="trans_forearm_roll">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="forearm_roll">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="forearm_roll_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <link name="$(arg robot_name)/lower_forearm_link">
+    <visual>
+      <origin rpy="${pi} 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_5_lower_forearm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin rpy="${pi} 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_5_lower_forearm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="${pi} 0 0" xyz="0.0513477000 0.0068046200 0"/>
+      <mass value="0.414823" />
+      <inertia ixx="0.0001753000" iyy="0.0005269000" izz="0.0005911000" ixy="-0.0000852800" ixz="0" iyz="0" />
+    </inertial>
+  </link>
+
+  <joint name="wrist_1_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="5" lower="${radians(-107)}" upper="${radians(128)}" velocity="${pi}"/>
+    <origin rpy="0 0 ${pi/2}" xyz="0.1 0 0"/>
+    <parent link="$(arg robot_name)/lower_forearm_link"/>
+    <child link="$(arg robot_name)/wrist_1_link"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <transmission name="trans_wrist_angle">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_angle">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_angle_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <link name="$(arg robot_name)/wrist_1_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_7dof_wrist_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_7dof_wrist_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.00016056389157290035 -0.04783644576268217 0.011114667243825252" rpy="0 0 0"/>
+      <mass value="${1.07623782249*0.10722072537234043}"/>
+      <inertia ixx="${1.07623782249*3.9e-05}" iyy="${1.07623782249*3.9e-05}" izz="${1.07623782249*4.2e-05}" ixy="-0.0" iyz="${1.07623782249*3e-06}" ixz="-0.0"/>
+    </inertial>
+  </link>
+
+  <link name="$(arg robot_name)/wrist_2_link">
+    <inertial>
+      <origin xyz="4.3609031555899395e-07 -0.02330839051358337 0.0056858689583885414" rpy="0 0 0"/>
+      <mass value="${0.3550193081*0.2816748208234703}"/>
+      <inertia ixx="${0.3550193081*9.6e-05}" iyy="${0.3550193081*8.4e-05}" izz="${0.3550193081*0.000125}" ixy="-0.0" iyz="${0.3550193081*-1e-06}" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000161 0.07 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_7dof_wrist_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000161 0.07 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_7dof_wrist_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="wrist_2_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit effort="5" lower="${-pi + pi_offset}" upper="${pi - pi_offset}" velocity="${pi}"/>
+    <origin xyz="-0.000161 -0.07 0.0" rpy="0 0 0"/>
+    <parent link="$(arg robot_name)/wrist_1_link"/>
+    <child link="$(arg robot_name)/wrist_2_link"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+
+  <link name="$(arg robot_name)/wrist_3_link">
+    <inertial>
+      <origin xyz="0.006991739511968901 0.00431837142418863 -0.01147389409196783" rpy="0 0 0"/>
+      <mass value="${0.13688306707*0.1461101100956427}"/>
+        <inertia ixx="${0.13688306707*1e-05}" iyy="${0.13688306707*6.3e-05}" izz="${0.13688306707*6.4e-05}" ixy="${0.13688306707*-2e-06}" iyz="0.0" ixz="${0.13688306707*1e-06}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000161 0.11125 0.01325" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_7dof_wrist_3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="interbotix_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000161 0.11125 0.01325" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://vx300s_7dof_description/meshes/vx300s_7dof_wrist_3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="wrist_3_joint" type="revolute">
+    <origin xyz="0.0 -0.04125 0.02475" rpy="0 ${pi} ${pi}"/>
+    <limit effort="5" lower="${-pi + pi_offset}" upper="${pi - pi_offset}" velocity="${pi}"/>
+    <parent link="$(arg robot_name)/wrist_2_link"/>
+    <child link="$(arg robot_name)/wrist_3_link"/>
+    <axis xyz="-0.0 -0.0 -1.0"/>
+    <dynamics friction="0.1"/>
+  </joint>
+
+  <link name="$(arg robot_name)/camera_attach_link"/>
+
+  <joint name="camera_attach_joint" type="fixed">
+    <origin xyz="0 0.0011925388 -0.03" rpy="${pi} 0 ${pi/2}"/>
+    <parent link="$(arg robot_name)/wrist_3_link"/>
+    <child link="$(arg robot_name)/camera_attach_link"/>
+  </joint>
+
+
+  <xacro:include filename="$(find vx300s_7dof_description)/urdf/zedm_macro.urdf.xacro" />
+  <xacro:zedm_camera name="zed" parent="$(arg robot_name)/camera_attach_link">
+    <origin 
+      xyz="0 0 0" 
+      rpy="0 0 0"
+    />
+  </xacro:zedm_camera>
+
+  <xacro:if value="${urdf_loc != ''}">
+    <xacro:include filename="${urdf_loc}"/>
+  </xacro:if>
+
+</robot>

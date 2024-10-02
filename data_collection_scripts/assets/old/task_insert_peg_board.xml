@@ -1,0 +1,37 @@
+<mujoco>
+    <include file="scene.xml"/>
+
+
+    <worldbody>
+        <body name="board_with_holes" pos="0 -0.1 0.0">
+            <joint  type="free" frictionloss="0.01" />
+            <geom  pos="0 0.01 0.01" size="0.005 0.005 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="0 -0.01 0.01" size="0.005 0.005 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="0.025 0 0.01" size="0.02 0.015 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="-0.025 0 0.01" size="0.02 0.015 0.01" type="box" rgba=".5 .7 .5 1"/>
+
+            <body pos="0.09 0 0">
+                <geom  pos="0 0.01 0.01" size="0.005 0.005 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="0 -0.01 0.01" size="0.005 0.005 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="0.015 0 0.01" size="0.01 0.015 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="-0.025 0 0.01" size="0.02 0.015 0.01" type="box" rgba=".5 .7 .5 1"/>
+            </body>
+            <body pos="-0.09 0 0">
+                <geom  pos="0 0.01 0.01" size="0.005 0.005 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="0 -0.01 0.01" size="0.005 0.005 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="0.025 0 0.01" size="0.02 0.015 0.01" type="box" rgba=".5 .7 .5 1"/>
+            <geom  pos="-0.015 0 0.01" size="0.01 0.015 0.01" type="box" rgba=".5 .7 .5 1"/>
+            </body>
+        </body>
+
+        <body name="board_with_pegs" pos="0 0 0.015" euler="1.57 0 0">
+            <joint type="free" frictionloss="0.01" />
+            <geom  pos="0 0 0.01" size="0.115 0.015 0.01" type="box" rgba=".7 .5 .5 1"/>
+            <geom  pos="0 0 0.03" size="0.003 0.003 0.01" type="box" rgba=".7 .5 .5 1"/>
+            <geom  pos="0.09 0 0.03" size="0.003 0.003 0.01" type="box" rgba=".7 .5 .5 1"/>
+            <geom  pos="-0.09 0 0.03" size="0.003 0.003 0.01" type="box" rgba=".7 .5 .5 1"/>
+        </body>
+
+    </worldbody>
+
+</mujoco>
