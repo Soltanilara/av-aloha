@@ -202,3 +202,17 @@ python lerobot/lerobot/scripts/eval.py \
         --episode_len 700 \
         --num_episodes 50
     ```
+
+## Citation
+
+```
+@misc{chuang2024activevisionneedexploring,
+    title={Active Vision Might Be All You Need: Exploring Active Vision in Bimanual Robotic Manipulation}, 
+    author={Ian Chuang and Andrew Lee and Dechen Gao and Iman Soltani},
+    year={2024},
+    eprint={2409.17435},
+    archivePrefix={arXiv},
+    primaryClass={cs.RO},
+    url={https://arxiv.org/abs/2409.17435}, 
+}
+```
